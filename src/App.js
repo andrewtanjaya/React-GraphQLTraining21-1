@@ -1,24 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
+import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client'
+import ListFoods from './components/ListFoods';
+import Form from './components/Form';
+
+const client = new ApolloClient({
+  cache : new InMemoryCache(),
+  uri : "http://localhost:8080/query"
+})
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ApolloProvider client={client}>
+      <Form></Form>
+      <ListFoods></ListFoods>
+      
+    </ApolloProvider>
   );
 }
 
